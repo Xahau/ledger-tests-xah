@@ -4,9 +4,19 @@ import { encode } from '@transia/xrpl'
 import SpeculosTransport from '@ledgerhq/hw-transport-node-speculos'
 import Xrp from '@ledgerhq/hw-app-xrp'
 import { DeviceData, LedgerTestContext } from './types'
+import {
+  XrplIntegrationTestContext,
+  balance,
+  fund,
+  ICXRP,
+  prepareTransactionV3,
+} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
+
 const apduPort = 40000
 
-export async function setupLedger(): Promise<LedgerTestContext> {
+export async function setupLedger(
+  testContext: XrplIntegrationTestContext
+): Promise<LedgerTestContext> {
   console.log('Connecting to device...')
 
   try {
@@ -15,6 +25,14 @@ export async function setupLedger(): Promise<LedgerTestContext> {
     const deviceData = await xrp.getAddress("44'/144'/0'/0/0")
     console.log(`Got address: ${deviceData.address}`)
     console.log('Connection established!')
+    if ((await balance(testContext.client, deviceData.address)) < 1000) {
+      await fund(
+        testContext.client,
+        testContext.master,
+        new ICXRP(10000),
+        ...[deviceData.address]
+      )
+    }
     return {
       transport: transport,
       app: xrp,
@@ -35,33 +53,44 @@ export async function teardownLedger(context: LedgerTestContext) {
 }
 
 export async function testTransaction(
-  context: LedgerTestContext,
+  testContext: XrplIntegrationTestContext,
+  ledgerContext: LedgerTestContext,
   file: string
 ): Promise<string> {
   const fileContent = fs
     .readFileSync(file, { encoding: 'utf-8' })
-    .replace(/OWN_ADDR/g, context.deviceData.address)
-    .replace(/OWN_PUBKEY/g, context.deviceData.publicKey.toUpperCase())
+    .replace(/OWN_ADDR/g, ledgerContext.deviceData.address)
 
   const transactionJSON = JSON.parse(fileContent)
 
+  // clear fields
+  delete transactionJSON.Fee
+  delete transactionJSON.Sequence
+  await prepareTransactionV3(testContext.client, transactionJSON)
+  const preparedTx = await testContext.client.autofill(transactionJSON, 0)
+  preparedTx.SigningPubKey = ledgerContext.deviceData.publicKey.toUpperCase()
+  if (preparedTx.Flags === 0) {
+    delete preparedTx.Flags
+  }
+
   // Output pretty-printed test data
   console.log(
-    util.inspect(transactionJSON, {
+    util.inspect(preparedTx, {
       colors: true,
       compact: false,
       depth: Infinity,
     })
   )
 
-  const transactionBlob = encode(transactionJSON)
+  const transactionBlob = encode(preparedTx)
 
   try {
-    const signature = await context.app.signTransaction(
+    const signature = await ledgerContext.app.signTransaction(
       "44'/144'/0'/0/0",
       transactionBlob
     )
-    return signature.toUpperCase()
+    preparedTx.TxnSignature = signature.toUpperCase()
+    return encode(preparedTx)
   } catch (error: any) {
     console.log(error.message)
 

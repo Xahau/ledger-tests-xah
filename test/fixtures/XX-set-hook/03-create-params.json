@@ -9,7 +9,15 @@
                 "HookNamespace": "0000000000000000000000000000000000000000000000000000000000000000",
                 "HookOn": "0000000000000000000000000000000000000000000000000000000000000000",
                 "HookApiVersion": 0,
-                "Flags": 1
+                "Flags": 1,
+                "HookParameters": [
+                    {
+                        "HookParameter": {
+                            "HookParameterName": "697066733A2F2F4445414442454546697066733A2F2F44454144424545467878",
+                            "HookParameterValue": "DEADBEEF"
+                        }
+                    }
+                ]
             }
         }
     ]

@@ -1,29 +1,61 @@
-// xrpl-helpers
 import {
   LedgerTestContext,
   setupLedger,
   teardownLedger,
   testTransaction,
 } from '../../dist/npm/src'
+// xrpl-helpers
+import {
+  XrplIntegrationTestContext,
+  setupClient,
+  teardownClient,
+  serverUrl,
+  close,
+} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
 
 describe('Invoke', () => {
   let ledgerContext: LedgerTestContext
+  let testContext: XrplIntegrationTestContext
 
   beforeAll(async () => {
-    ledgerContext = await setupLedger()
+    testContext = await setupClient(serverUrl)
+    ledgerContext = await setupLedger(testContext)
   })
   afterAll(async () => {
+    teardownClient(testContext)
     teardownLedger(ledgerContext)
   })
 
-  it('invoke - all', async () => {
-    console.log('TESTING')
-    const signature = await testTransaction(
+  it('invoke - basic', async () => {
+    const txBlob = await testTransaction(
+      testContext,
       ledgerContext,
       'test/fixtures/XX-invoke/01-basic.json'
     )
-    expect(signature).toMatch(
-      '3045022100F629BEBD9A7477FAD3BD81A7BCAC23C94EEF9F2D1DA697937ACB26C8814C8EF0022008ED0473A5D3F6DB168F4A7F871DA3EA8105782E2498F4532812A016917A5F00'
+    await testContext.client.submit(txBlob)
+    const response = await testContext.client.submit(txBlob)
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
+    await close(testContext.client)
+  })
+  it('invoke - blob', async () => {
+    const txBlob = await testTransaction(
+      testContext,
+      ledgerContext,
+      'test/fixtures/XX-invoke/02-blob.json'
     )
+    await testContext.client.submit(txBlob)
+    const response = await testContext.client.submit(txBlob)
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
+    await close(testContext.client)
+  })
+  it('invoke - params', async () => {
+    const txBlob = await testTransaction(
+      testContext,
+      ledgerContext,
+      'test/fixtures/XX-invoke/03-params.json'
+    )
+    const response = await testContext.client.submit(txBlob)
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
+    await close(testContext.client)
   })
 })

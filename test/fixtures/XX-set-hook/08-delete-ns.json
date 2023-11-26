@@ -1,0 +1,13 @@
+{
+    "TransactionType": "SetHook",
+    "Account": "OWN_ADDR",
+    "Flags": 0,
+    "Hooks": [
+        {
+            "Hook": {
+                "HookNamespace": "0000000000000000000000000000000000000000000000000000000000000000",
+                "Flags": 2
+            }
+        }
+    ]
+}

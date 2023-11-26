@@ -2,7 +2,7 @@
     "TransactionType": "URITokenMint",
     "Account": "OWN_ADDR",
     "Fee": "15",
-    "URI": "697066733A2F2F434944",
+    "URI": "697066733A2F2F6275726E61626C65",
     "Flags": 1,
     "Sequence": 3,
     "NetworkID": 21337,

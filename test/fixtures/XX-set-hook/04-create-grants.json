@@ -9,7 +9,15 @@
                 "HookNamespace": "0000000000000000000000000000000000000000000000000000000000000000",
                 "HookOn": "0000000000000000000000000000000000000000000000000000000000000000",
                 "HookApiVersion": 0,
-                "Flags": 1
+                "Flags": 1,
+                "HookGrants": [
+                    {
+                        "HookGrant": {
+                            "HookHash": "23AF965A7B30E138580412E4F35CEBB26F14704CDEC3EA1DF493B78F671A2039",
+                            "Authorize": "rBKz5MC2iXdoS3XgnNSYmF69K1Yo4NS3Ws"
+                        }
+                    }
+                ]
             }
         }
     ]

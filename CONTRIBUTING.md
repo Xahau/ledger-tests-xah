@@ -45,5 +45,5 @@ Build the App-XAH using the Ledger VS Code extension & copy the bin/app.elf into
 
 Run speculos with
 ```sh
-docker run --rm -it -v $(pwd)/apps:/speculos/apps --publish 40000:40000 --publish 41000:41000 --publish 5001:5001 speculos --display headless --vnc-port 41000 --api-port 5001 --apdu-port 40000 --model nanox apps/xah.elf
+docker run --rm -it -v $(pwd)/apps:/speculos/apps --publish 40000:40000 --publish 41000:41000 --publish 5001:5001 speculos --display headless --vnc-port 41000 --api-port 5001 --apdu-port 40000 --model nanox --seed "ssbTMHrmEJP7QEQjWJH3a72LQipBM" apps/app.elf
 ```

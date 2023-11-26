@@ -1,7 +1,10 @@
 {
     "TransactionType": "SetHook",
+    "Account": "OWN_ADDR",
     "Flags": 0,
     "Hooks": [
-        {}
+        {
+            "Hook": {}
+        }
     ]
 }

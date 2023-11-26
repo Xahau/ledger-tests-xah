@@ -1,0 +1,9 @@
+{
+    "TransactionType": "ClaimReward",
+    "Account": "OWN_ADDR",
+    "Fee": "15",
+    "Flags": 1,
+    "Sequence": 3,
+    "NetworkID": 21337,
+    "SigningPubKey": "OWN_PUBKEY"
+}

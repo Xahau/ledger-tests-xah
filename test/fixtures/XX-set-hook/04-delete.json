@@ -1,0 +1,10 @@
+{
+    "TransactionType": "SetHook",
+    "Flags": 0,
+    "Hooks": [
+        {
+            "CreateCode": "",
+            "Flags": 1
+        }
+    ]
+}

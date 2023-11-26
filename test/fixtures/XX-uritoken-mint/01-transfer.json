@@ -1,0 +1,11 @@
+{
+    "TransactionType": "URITokenMint",
+    "Account": "OWN_ADDR",
+    "Fee": "15",
+    "URI": "697066733A2F2F434944",
+    "Destination": "rBKz5MC2iXdoS3XgnNSYmF69K1Yo4NS3Ws",
+    "Amount": "1000000",
+    "Sequence": 3,
+    "NetworkID": 21337,
+    "SigningPubKey": "OWN_PUBKEY"
+}

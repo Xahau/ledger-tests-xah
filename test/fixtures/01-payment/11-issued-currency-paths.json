@@ -71,7 +71,7 @@
     ]
   ],
   "Fee": "15",
-  "Flags": 2147549184,
+  "Flags": 65536,
   "Sequence": 7,
   "SigningPubKey": "OWN_PUBKEY"
 }

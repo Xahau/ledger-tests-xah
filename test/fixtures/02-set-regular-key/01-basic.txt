@@ -1,0 +1,5 @@
+Transaction Type; SetRegularKey
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000018
+NetworkID; 21337
+Regular Key; rTooLkitCksh5mQa67eaa2JaWHDBnHkpy

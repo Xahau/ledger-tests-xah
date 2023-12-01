@@ -1,0 +1,8 @@
+Transaction Type; EscrowFinish
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Owner; OWN_ADDR
+Offer Sequence; 3
+Condition; A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100
+Fulfillment; A0028000
+Fee; XAH 0.000400
+NetworkID; 21337

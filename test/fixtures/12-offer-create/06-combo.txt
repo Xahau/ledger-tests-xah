@@ -1,0 +1,10 @@
+Transaction Type; OfferCreate
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+NetworkID; 21337
+Flags; 851968
+Last Ledger Sequence; 7108682
+Taker Pays; [object Object]
+Taker Gets; [object Object]
+Expiration; 534171558
+Offer Sequence; 4321

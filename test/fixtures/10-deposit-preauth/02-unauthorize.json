@@ -2,7 +2,8 @@
     "TransactionType": "DepositPreauth",
     "Account": "OWN_ADDR",
     "Fee": "10",
-    "Flags": 2147483648,
+    "NetworkID": 21337,
+    "Flags": 0,
     "Sequence": 28,
     "Unauthorize": "rEhxGqkqPPSxQ3P25J66ft5TwpzV14k2de"
 }

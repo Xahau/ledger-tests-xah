@@ -69,9 +69,9 @@ export async function testTransaction(
   await prepareTransactionV3(testContext.client, transactionJSON)
   const preparedTx = await testContext.client.autofill(transactionJSON, 0)
   preparedTx.SigningPubKey = ledgerContext.deviceData.publicKey.toUpperCase()
-  if (preparedTx.Flags === 0) {
-    delete preparedTx.Flags
-  }
+  // if (preparedTx.Flags === 0) {
+  //   delete preparedTx.Flags
+  // }
 
   // Output pretty-printed test data
   console.log(
@@ -107,5 +107,35 @@ export async function testTransaction(
       default:
         fail(error.statusText || `Unknown error (${error.message})`)
     }
+  }
+}
+
+export async function blobTransaction(
+  address: string,
+  publicKey: string,
+  file: string
+): Promise<string> {
+  const fileContent = fs
+    .readFileSync(file, { encoding: 'utf-8' })
+    .replace(/OWN_ADDR/g, address)
+    .replace(/OWN_PUBKEY/g, publicKey.toUpperCase())
+
+  const transactionJSON = JSON.parse(fileContent)
+
+  // Output pretty-printed test data
+  console.log(
+    util.inspect(transactionJSON, {
+      colors: true,
+      compact: false,
+      depth: Infinity,
+    })
+  )
+
+  const transactionBlob = encode(transactionJSON)
+
+  try {
+    return transactionBlob
+  } catch (error: any) {
+    fail(`Unknown (${error.message})`)
   }
 }

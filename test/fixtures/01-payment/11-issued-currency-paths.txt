@@ -1,0 +1,8 @@
+Transaction Type; Payment
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Amount; XAH NaN
+Send Max; 100
+Paths; [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Fee; XAH 0.000015
+Flags; 65536
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

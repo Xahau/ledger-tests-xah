@@ -1,0 +1,6 @@
+Transaction Type; EscrowCancel
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Owner; OWN_ADDR
+Offer Sequence; 3
+Fee; XAH 0.000020
+NetworkID; 21337

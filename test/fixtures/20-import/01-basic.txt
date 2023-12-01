@@ -1,0 +1,5 @@
+Transaction Type; Import
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Blob; DEADBEEF
+Fee; XAH 0.000015
+NetworkID; 21337

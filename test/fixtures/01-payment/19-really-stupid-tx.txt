@@ -1,0 +1,16 @@
+Transaction Type; Payment
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Source Tag; 4294967295
+Destination Tag; 4294967295
+Amount; XAH 100000000000
+Send Max; [object Object]
+Deliver Min; [object Object]
+Paths; [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+Invoice I D; F86D43FBCFC24B31AD5F035083B34722C71871412A60429D4D79DAA833031EA6
+Account Txn I D; F02EB74CB4F5D2E6AC8BE70CEA41CCA872E680F9EFD2027605F0B42666037AA8
+Memos; [object Object]
+Fee; XAH 2.000000
+NetworkID; 21337
+Flags; 458752
+Last Ledger Sequence; 87108682
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

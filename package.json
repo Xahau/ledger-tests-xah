@@ -4,6 +4,7 @@
   "description": "Test utility for testing functionality of ledger-app-xah",
   "scripts": {
     "build": "tsc",
+    "test:unit": "LOG_LEVEL=error jest --config=jest.config.unit.js --runInBand",
     "test:integration": "LOG_LEVEL=error jest --config=jest.config.integration.js --runInBand",
     "lint": "eslint ./src/**/* --ext .ts",
     "format": "npx prettier --write ./src"

@@ -1,0 +1,8 @@
+Transaction Type; Payment
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Amount; XAH 200
+Send Max; [object Object]
+Deliver Min; [object Object]
+Fee; XAH 0.000015
+Flags; 393216
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

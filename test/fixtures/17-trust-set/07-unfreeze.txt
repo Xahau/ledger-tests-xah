@@ -1,0 +1,6 @@
+Transaction Type; TrustSet
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+NetworkID; 21337
+Flags; 2097152
+Limit Amount; [object Object]

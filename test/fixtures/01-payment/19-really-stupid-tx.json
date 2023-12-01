@@ -92,7 +92,8 @@
     }
   ],
   "Fee": "2000000",
-  "Flags": 2147942400,
+  "NetworkID": 21337,
+  "Flags": 458752,
   "Sequence": 131429307,
   "LastLedgerSequence": 87108682,
   "SigningPubKey": "OWN_PUBKEY"

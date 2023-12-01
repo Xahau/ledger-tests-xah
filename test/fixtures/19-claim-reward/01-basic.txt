@@ -1,0 +1,5 @@
+Transaction Type; ClaimReward
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000015
+NetworkID; 21337
+Issuer;   rBKz5MC2iXd     oS3XgnNSYmF     69K1Yo4NS3W   s

@@ -2,7 +2,8 @@
     "TransactionType": "OfferCreate",
     "Account": "OWN_ADDR",
     "Fee": "10",
-    "Flags": 2147745792,
+    "NetworkID": 21337,
+    "Flags": 262144,
     "LastLedgerSequence": 7108682,
     "Sequence": 25,
     "TakerPays": {

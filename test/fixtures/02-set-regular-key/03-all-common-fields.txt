@@ -1,0 +1,8 @@
+Transaction Type; SetRegularKey
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000018
+NetworkID; 21337
+Source Tag; 888
+Account Txn I D; F02EB74CB4F5D2E6AC8BE70CEA41CCA872E680F9EFD2027605F0B42666037AA8
+Memos; [object Object],[object Object],[object Object]
+Regular Key; rTooLkitCksh5mQa67eaa2JaWHDBnHkpy

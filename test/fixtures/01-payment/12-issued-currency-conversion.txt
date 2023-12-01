@@ -1,0 +1,8 @@
+Transaction Type; Payment
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Amount; XAH 100
+Send Max; [object Object]
+Paths; [object Object],[object Object],[object Object],[object Object]
+Fee; XAH 0.000015
+NetworkID; 21337
+Destination; OWN_ADDR

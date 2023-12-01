@@ -1,0 +1,8 @@
+Transaction Type; PaymentChannelClaim
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+NetworkID; 21337
+Flags; 131072
+Amount; XAH 100
+Balance; 100000000
+Channel; C1AE6DDDEEC05CF2978C0BAD6FE302948E9533691DC749DCDD3B9E5992CA6198

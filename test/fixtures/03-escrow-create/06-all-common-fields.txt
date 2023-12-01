@@ -1,0 +1,13 @@
+Transaction Type; EscrowCreate
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Source Tag; 888
+Destination Tag; 1338
+Account Txn I D; F02EB74CB4F5D2E6AC8BE70CEA41CCA872E680F9EFD2027605F0B42666037AA8
+Memos; [object Object],[object Object],[object Object]
+Amount; XAH 0
+Cancel After; 533257958
+Finish After; 533171558
+Condition; A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100
+Fee; XAH 0.000020
+NetworkID; 21337
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

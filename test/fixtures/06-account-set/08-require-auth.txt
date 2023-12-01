@@ -1,0 +1,5 @@
+Transaction Type; AccountSet
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+NetworkID; 21337
+Set Flag; 2

@@ -2,7 +2,8 @@
   "TransactionType": "TrustSet",
   "Account": "OWN_ADDR",
   "Fee": "10",
-  "Flags": 2147614720,
+  "NetworkID": 21337,
+  "Flags": 131072,
   "Sequence": 25,
   "LimitAmount": {
     "currency": "b^C",

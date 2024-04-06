@@ -47,3 +47,5 @@ Run speculos with
 ```sh
 docker run --rm -it -v $(pwd)/apps:/speculos/apps --publish 40000:40000 --publish 41000:41000 --publish 5001:5001 speculos --display headless --vnc-port 41000 --api-port 5001 --apdu-port 40000 --model nanox --seed "ssbTMHrmEJP7QEQjWJH3a72LQipBM" apps/app.elf
 ```
+
+Then open the browser: http://127.0.0.1:5000 or http://127.0.0.1:5001

@@ -1,6 +1,6 @@
 Transaction Type; CheckCreate
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000010
+Fee; XAH 0.00001
 Network ID; 21337
 Invoice ID; 6f1dfd1d0fe8a32e40e1f2c05cf1c15545bab56b617f9c6c2d63a6b704bef59b
 Destination Tag; 1

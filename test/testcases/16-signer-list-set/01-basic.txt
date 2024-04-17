@@ -1,6 +1,6 @@
 Transaction Type; SignerListSet
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000010
+Fee; XAH 0.00001
 Network ID; 21337
 Signer Quorum; 11
 Signer Entries; [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]

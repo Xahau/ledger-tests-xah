@@ -10,9 +10,9 @@ Memo Type [2]; https://www.xrptoolkit.com
 Memo Data [3]; Towo Labs <3 The XRP Ledger & Interledger Protocol
 Memo Type [3]; https://www.xrptoolkit.com
 Memo Fmt [3]; text/plain
-Amount; XAH 0
+Amount; XAH 0.01
 Cancel After; 533257958
 Finish After; 533171558
 Condition; A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100
-Fee; XAH 0.000020
+Fee; XAH 0.00002
 Network ID; 21337

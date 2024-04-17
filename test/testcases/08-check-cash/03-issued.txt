@@ -1,6 +1,6 @@
 Transaction Type; CheckCash
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000010
+Fee; XAH 0.00001
 Network ID; 21337
 Amount; USD 98218
 Issuer;   r9cZA1mLK5R5     Am25ArfXFmqg   NwjZgnfk59

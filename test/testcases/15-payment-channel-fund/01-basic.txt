@@ -1,7 +1,7 @@
 Transaction Type; PaymentChannelFund
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000010
+Fee; XAH 0.00001
 Network ID; 21337
-Amount; XAH 0
+Amount; XAH 0.01
 Channel; C1AE6DDDEEC05CF2978C0BAD6FE302948E9533691DC749DCDD3B9E5992CA6198
 Expiration; 543171558

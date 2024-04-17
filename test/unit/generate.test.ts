@@ -39,7 +39,10 @@ const ignoreFields = ['SigningPubKey', 'Sequence']
 function formatAmount(amount: any) {
   if (typeof amount === 'string') {
     const xrpAmount = parseInt(amount) / 1000000
-    return `XAH ${xrpAmount.toFixed(0)}`
+    const decimals = String(xrpAmount).includes('.')
+      ? String(String(xrpAmount).split('.').pop()).length
+      : 0
+    return `XAH ${xrpAmount.toFixed(decimals)}`
   }
   if (amount.currency > 3) {
     return amount.value
@@ -51,7 +54,10 @@ function formatAmount(amount: any) {
 function formatFee(fee: string) {
   // Assuming the fee is in drops
   const xrpFee = parseInt(fee) / 1000000
-  return `XAH ${xrpFee.toFixed(6)}`
+  const decimals = String(xrpFee).includes('.')
+    ? String(String(xrpFee).split('.').pop()).length
+    : 0
+  return `XAH ${xrpFee.toFixed(decimals)}`
 }
 
 // Helper function to format the account and destination

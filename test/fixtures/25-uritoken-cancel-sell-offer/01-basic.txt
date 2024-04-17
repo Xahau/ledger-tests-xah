@@ -1,4 +1,0 @@
-Transaction Type; URITokenCancelSellOffer
-Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000015
-NetworkID; 21337

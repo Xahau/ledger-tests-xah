@@ -1,0 +1,7 @@
+Transaction Type; CheckCash
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+Network ID; 21337
+Amount; USD 98218
+Issuer;   r9cZA1mLK5R5     Am25ArfXFmqg   NwjZgnfk59
+Check ID; 838766BA2B995C00744175F69A1B11E32C3DBC40E64801A4056FCBD657F57334

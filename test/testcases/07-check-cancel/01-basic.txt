@@ -1,0 +1,5 @@
+Transaction Type; CheckCancel
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+Network ID; 21337
+Check ID; 49647F0D748DC3FE26BDACBC57F251AADEFFF391403EC9BF87C97F67E9977FB0

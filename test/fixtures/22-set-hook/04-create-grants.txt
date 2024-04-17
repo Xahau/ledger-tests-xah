@@ -1,4 +1,0 @@
-Transaction Type; SetHook
-Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000050
-NetworkID; 21337

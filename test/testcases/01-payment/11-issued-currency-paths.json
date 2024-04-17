@@ -1,0 +1,59 @@
+{
+  "TransactionType": "Payment",
+  "Account": "OWN_ADDR",
+  "Destination": "rTooLkitCksh5mQa67eaa2JaWHDBnHkpy",
+  "Amount": {
+    "value": "123.45",
+    "currency": "USD",
+    "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+  },
+  "Fee": "15",
+  "SendMax": "100",
+  "Flags": 65536,
+  "Paths": [
+    [
+      {
+        "issuer": "rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y",
+        "currency": "CNY"
+      },
+      {
+        "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+        "currency": "USD"
+      }
+    ],
+    [
+      {
+        "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+        "currency": "USD"
+      }
+    ],
+    [
+      {
+        "issuer": "rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq",
+        "currency": "USD"
+      },
+      {
+        "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B",
+        "currency": "USD"
+      }
+    ],
+    [
+      {
+        "account": "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X"
+      },
+      {
+        "account": "rLQrHSoJnzHzmdFDHYoW85Cze8Teu97JN2"
+      }
+    ],
+    [
+      {
+        "account": "r9vbV3EHvXWjSkeQ6CAcYVPGeq7TuiXY2X"
+      },
+      {
+        "account": "r9JS9fLbtLzgBCdFCnS3LpVPUBJAmg7PnM"
+      }
+    ]
+  ],
+  "Sequence": 7,
+  "SigningPubKey": "OWN_PUBKEY"
+}

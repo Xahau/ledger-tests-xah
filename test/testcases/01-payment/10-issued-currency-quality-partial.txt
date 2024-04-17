@@ -1,0 +1,8 @@
+Transaction Type; Payment
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Amount; XAH 200
+Send Max; USD 123.56
+Deliver Min; USD 123.45
+Fee; XAH 0.000015
+Flags; 393216

@@ -1,0 +1,5 @@
+Transaction Type; DepositPreauth
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Fee; XAH 0.000010
+Network ID; 21337
+Unauthorize; rEhxGqkqPPSxQ3P25J66ft5TwpzV14k2de

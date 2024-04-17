@@ -1,28 +1,51 @@
-// xrpl-helpers
 import {
   LedgerTestContext,
   setupLedger,
   teardownLedger,
   testTransaction,
 } from '../../dist/npm/src'
+// xrpl-helpers
+import {
+  XrplIntegrationTestContext,
+  setupClient,
+  teardownClient,
+  serverUrl,
+  close,
+} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
 
 describe('Import', () => {
   let ledgerContext: LedgerTestContext
+  let testContext: XrplIntegrationTestContext
 
   beforeAll(async () => {
-    ledgerContext = await setupLedger()
+    testContext = await setupClient(serverUrl)
+    ledgerContext = await setupLedger(testContext)
   })
   afterAll(async () => {
+    teardownClient(testContext)
     teardownLedger(ledgerContext)
   })
 
-  it('import - all', async () => {
-    const signature = await testTransaction(
+  it('import - basic', async () => {
+    const txBlob = await testTransaction(
+      testContext,
       ledgerContext,
-      'test/fixtures/XX-import/01-basic.json'
+      'test/fixtures/20-import/01-basic.json'
     )
-    expect(signature).toMatch(
-      '3045022100F629BEBD9A7477FAD3BD81A7BCAC23C94EEF9F2D1DA697937ACB26C8814C8EF0022008ED0473A5D3F6DB168F4A7F871DA3EA8105782E2498F4532812A016917A5F00'
+    await testContext.client.submit(txBlob)
+    const response = await testContext.client.submit(txBlob)
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
+    await close(testContext.client)
+  })
+  it('import - isser', async () => {
+    const txBlob = await testTransaction(
+      testContext,
+      ledgerContext,
+      'test/fixtures/21-import/02-isser.json'
     )
+    await testContext.client.submit(txBlob)
+    const response = await testContext.client.submit(txBlob)
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
+    await close(testContext.client)
   })
 })

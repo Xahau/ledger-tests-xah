@@ -30,7 +30,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/XX-invoke/01-basic.json'
+      'test/fixtures/21-invoke/01-basic.json'
     )
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
@@ -41,7 +41,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/XX-invoke/02-blob.json'
+      'test/fixtures/21-invoke/02-blob.json'
     )
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
@@ -52,7 +52,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/XX-invoke/03-params.json'
+      'test/fixtures/21-invoke/03-params.json'
     )
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')

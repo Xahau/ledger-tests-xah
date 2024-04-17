@@ -1,5 +1,9 @@
 # Ledger XAH App Contributing
 
+### Run Standalone
+
+`xrpld-netgen up:standalone --network_id=21338`
+
 ## Building XAH Ledger App
 
 Resources:
@@ -41,7 +45,6 @@ docker build -t speculos:latest .
 ## Run App-XAH with Speculos
 
 Build the App-XAH using the Ledger VS Code extension & copy the bin/app.elf into the speculos/apps directory
-
 
 Run speculos with
 ```sh

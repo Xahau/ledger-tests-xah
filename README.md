@@ -21,5 +21,5 @@ The available tests can be filtered based on the arguments you pass when startin
 
 You can choose to supply a list of filters by running the test suite as follows:
 ```sh
-yarn run test:integration test/integration/invoke.test.ts
+yarn run test:integration test/integration/payment.test.ts
 ```

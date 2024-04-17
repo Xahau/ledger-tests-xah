@@ -1,7 +1,6 @@
 import {
   LedgerTestContext,
   setupLedger,
-  blobTransaction,
   teardownLedger,
   testTransaction,
 } from '../../dist/npm/src'
@@ -13,7 +12,6 @@ import {
   serverUrl,
   close,
 } from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
-import { saveBinary } from '../tools'
 
 describe('ClaimReward', () => {
   let ledgerContext: LedgerTestContext
@@ -33,12 +31,7 @@ describe('ClaimReward', () => {
     const txBlob = await testTransaction(testContext, ledgerContext, filepath)
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
-    console.log(response)
-
-    // expect(response.result.engine_result).toMatch('tesSUCCESS')
+    expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)
-
-    const ledgerRaw = await blobTransaction(ledgerContext, filepath)
-    saveBinary(filepath.replace('.json', '.raw'), ledgerRaw)
   })
 })

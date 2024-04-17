@@ -2,5 +2,5 @@ Transaction Type; URITokenMint
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Fee; XAH 0.000015
 Network ID; 21337
-Flags; 1
-URI; 697066733A2F2F6275726E61626C65
+Flags; Burnable
+URI; 697066733a2f2f6275726e61626c65

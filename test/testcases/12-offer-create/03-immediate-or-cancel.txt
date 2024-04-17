@@ -2,7 +2,7 @@ Transaction Type; OfferCreate
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Fee; XAH 0.000010
 Network ID; 21337
-Flags; 131072
+Flags; Immediate or Cancel
 Last Ledger Sequence; 7108682
 Taker Pays; GKO 2
 Issuer;   ruazs5h1qEs     qpke88pcqna     seXdm6od2xc   

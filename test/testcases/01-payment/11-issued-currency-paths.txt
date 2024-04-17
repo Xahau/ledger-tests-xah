@@ -5,7 +5,7 @@ Amount; USD 123.45
 Issuer;   rvYAfWj5gh6     7oV6fW32ZzP     3Aw4Eubs59B   
 Fee; XAH 0.000015
 Send Max; XAH 0
-Flags; 65536
+Flags; No Direct Ripple
 Currency [P1: S1]; CNY
 Issuer [P1: S1];   rKiCet8SdvWx     PXnAgYarFUXM   h1zCPz432Y
 Currency [P1: S2]; USD

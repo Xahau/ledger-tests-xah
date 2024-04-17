@@ -2,5 +2,5 @@ Transaction Type; TrustSet
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Fee; XAH 0.000010
 Network ID; 21337
-Flags; 131072
+Flags; Set No Ripple
 Limit Amount; [object Object]

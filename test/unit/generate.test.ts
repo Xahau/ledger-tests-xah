@@ -5,6 +5,15 @@ import { saveBinary, saveJson } from '../tools'
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
+import {
+  accountSetFlagsToString,
+  claimRewardFlagsToString,
+  offerCreateFlagsToString,
+  paymentChannelClaimFlagsToString,
+  paymentFlagsToString,
+  trustSetFlagsToString,
+  uriTokenMintFlagsToString,
+} from './xrplJS'
 
 const readdir = util.promisify(fs.readdir)
 const stat = util.promisify(fs.stat)
@@ -148,10 +157,54 @@ async function processFixtures(address: string, publicKey: string) {
               }
 
               // Write to File
-              if (key === 'Flags' && formattedValue === 0) {
-                continue
-              }
               switch (key) {
+                case 'Flags':
+                  if ((formattedValue as number) === 0) {
+                    continue
+                  }
+                  if (jsonData.TransactionType === 'Payment') {
+                    const flagsString = paymentFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'AccountSet') {
+                    const flagsString = accountSetFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'OfferCreate') {
+                    const flagsString = offerCreateFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'PaymentChannelClaim') {
+                    const flagsString = paymentChannelClaimFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'TrustSet') {
+                    const flagsString = trustSetFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'URITokenMint') {
+                    const flagsString = uriTokenMintFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (jsonData.TransactionType === 'ClaimReward') {
+                    const flagsString = claimRewardFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  break
                 case 'Paths':
                   const paths = value as any[]
                   for (let i = 0; i < paths.length; i++) {
@@ -224,15 +277,23 @@ async function processFixtures(address: string, publicKey: string) {
                 case 'EscrowID':
                 case 'OfferID':
                 case 'URITokenID':
-                  let _value = formattedValue as string
-                  _value = _value.toLowerCase()
-                  textFile.write(`${key.split('ID')[0]} ID; ${_value}\n`)
+                  textFile.write(
+                    `${key.split('ID')[0]} ID; ${(
+                      formattedValue as string
+                    ).toLowerCase()}\n`
+                  )
                   break
                 case 'AccountTxnID':
-                  textFile.write(`Account Txn ID; ${formattedValue}\n`)
+                  textFile.write(
+                    `Account Txn ID; ${(
+                      formattedValue as string
+                    ).toLowerCase()}\n`
+                  )
                   break
                 case 'URI':
-                  textFile.write(`URI; ${formattedValue}\n`)
+                  textFile.write(
+                    `URI; ${(formattedValue as string).toLowerCase()}\n`
+                  )
                   break
                 default:
                   textFile.write(
@@ -243,9 +304,13 @@ async function processFixtures(address: string, publicKey: string) {
                       .trim()}; ${formattedValue}\n`
                   )
                   if (
-                    (key === 'Amount' ||
+                    (key === 'DeliverMax' ||
+                      key === 'DeliverMin' ||
+                      key === 'SendMax' ||
                       key === 'TakerPays' ||
-                      key === 'TakerGets') &&
+                      key === 'TakerGets' ||
+                      key === 'Balance' ||
+                      key === 'Amount') &&
                     typeof value === 'object'
                   ) {
                     if (

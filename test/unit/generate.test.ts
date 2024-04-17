@@ -155,6 +155,87 @@ function formatSignerAccount(i: number, element: any) {
   return `Account [${i}]; ${formatAccount(element.Account)}\n`
 }
 
+function formatTT(tt: string) {
+  switch (tt) {
+    case 'Payment':
+      return 'Payment'
+    case 'EscrowCreate':
+      return 'Create Escrow'
+    case 'EscrowFinish':
+      return 'Finish Escrow'
+    case 'AccountSet':
+      return 'Account Set'
+    case 'EscrowCancel':
+      return 'Cancel Escrow'
+    case 'SetRegularKey':
+      return 'Set Regular Key'
+    case 'SetNickname':
+      return 'Nickname Set'
+    case 'OfferCreate':
+      return 'Create Offer'
+    case 'OfferCancel':
+      return 'Cancel Offer'
+    case 'Contract':
+      return 'Contract'
+    case 'TicketCreate':
+      return 'Ticket Create'
+    case 'TicketCancel':
+      return 'Ticket Cancel'
+    case 'SignerListSet':
+      return 'Set Signer List'
+    case 'PaymentChannelCreate':
+      return 'Create Channel'
+    case 'PaymentChannelFund':
+      return 'Fund Channel'
+    case 'PaymentChannelClaim':
+      return 'Channel Claim'
+    case 'CheckCreate':
+      return 'Create Check'
+    case 'CheckCash':
+      return 'Cash Check'
+    case 'CheckCancel':
+      return 'Cancel Check'
+    case 'DepositPreauth':
+      return 'Preauth. Deposit'
+    case 'TrustSet':
+      return 'Set Trust Line'
+    case 'DeleteAccount':
+      return 'Delete Account'
+    case 'SetHook':
+      return 'Set Hook'
+    case 'NFTokenMint':
+      return 'NFToken Mint'
+    case 'NFTokenBurn':
+      return 'NFToken Burn'
+    case 'NFTokenCreateOffer':
+      return 'NFToken Create Offer'
+    case 'NFTokenCancelOffer':
+      return 'NFToken Cancel Offer'
+    case 'NFTokenAcceptOffer':
+      return 'NFToken Accept Offer'
+    case 'URITokenMint':
+      return 'URIToken Mint'
+    case 'URITokenBurn':
+      return 'URIToken Burn'
+    case 'URITokenBuy':
+      return 'URIToken Buy'
+    case 'URITokenCreateSellOffer':
+      return 'URIToken Create Offer'
+    case 'URITokenCancelSellOffer':
+      return 'URIToken Cancel Offer'
+    case 'GenesisMint':
+      return 'Genesis Mint'
+    case 'Import':
+      return 'Import'
+    case 'ClaimReward':
+      return 'Claim Reward'
+    case 'Invoke':
+      return 'Invoke'
+    default:
+      return 'Unknown'
+  }
+}
+
 const filterMultisign = [
   '17-multi-sign-parallel.json',
   '18-multi-sign-serial.json',
@@ -216,6 +297,11 @@ async function processFixtures(address: string, publicKey: string) {
 
               // Write to File
               switch (key) {
+                case 'TransactionType':
+                  textFile.write(
+                    `Transaction Type; ${formatTT(formattedValue as string)}\n`
+                  )
+                  break
                 case 'Flags':
                   if ((formattedValue as number) === 0) {
                     continue

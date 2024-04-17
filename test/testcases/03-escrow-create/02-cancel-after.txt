@@ -1,4 +1,4 @@
-Transaction Type; EscrowCreate
+Transaction Type; Create Escrow
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Amount; XAH 0.01

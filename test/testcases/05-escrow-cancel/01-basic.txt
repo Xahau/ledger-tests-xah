@@ -1,4 +1,4 @@
-Transaction Type; EscrowCancel
+Transaction Type; Cancel Escrow
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Owner;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Offer Sequence; 3

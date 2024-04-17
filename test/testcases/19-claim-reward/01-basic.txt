@@ -1,4 +1,4 @@
-Transaction Type; ClaimReward
+Transaction Type; Claim Reward
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Issuer;   rBKz5MC2iXdo    S3XgnNSYmF6     9K1Yo4NS3Ws   
 Fee; XAH 0.000015

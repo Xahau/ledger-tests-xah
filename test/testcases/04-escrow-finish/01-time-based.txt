@@ -1,4 +1,4 @@
-Transaction Type; EscrowFinish
+Transaction Type; Finish Escrow
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Owner;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Offer Sequence; 3

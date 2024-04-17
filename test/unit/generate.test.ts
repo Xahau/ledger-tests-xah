@@ -1,6 +1,7 @@
+import { decode } from '@transia/xrpl'
 import { blobTransaction } from '../../dist/npm/src'
 // xrpl-helpers
-import { saveBinary } from '../tools'
+import { saveBinary, saveJson } from '../tools'
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
@@ -34,9 +35,6 @@ function formatAccount(account: string) {
 }
 
 async function processFixtures(address: string, publicKey: string) {
-  console.log(address)
-  console.log(publicKey)
-
   const fixturesDir = 'test/fixtures'
   try {
     const folders = await readdir(fixturesDir)
@@ -107,6 +105,10 @@ async function processFixtures(address: string, publicKey: string) {
               publicKey,
               filepath
             )
+            const decoded = decode(ledgerRaw)
+            decoded.Account = 'OWN_ADDR'
+            decoded.SigningPubKey = 'OWN_PUBKEY'
+            saveJson(filepath, decoded)
             saveBinary(filepath.replace('.json', '.raw'), ledgerRaw)
           }
         }

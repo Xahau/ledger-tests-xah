@@ -3,9 +3,9 @@
   "Account": "OWN_ADDR",
   "Destination": "rTooLkitCksh5mQa67eaa2JaWHDBnHkpy",
   "Amount": {
-    "currency": "ABC",
     "value": "123000000",
-    "issuer": "OWN_ADDR"
+    "currency": "ABC",
+    "issuer": "rTooLkitCksh5mQa67eaa2JaWHDBnHkpy"
   },
   "Fee": "15",
   "NetworkID": 21337,

@@ -1,8 +1,8 @@
 {
-  "TransactionType" : "EscrowCreate",
-  "Account" : "OWN_ADDR",
-  "Destination" : "rTooLkitCksh5mQa67eaa2JaWHDBnHkpy",
-  "Amount" : "10000",
+  "TransactionType": "EscrowCreate",
+  "Account": "OWN_ADDR",
+  "Destination": "rTooLkitCksh5mQa67eaa2JaWHDBnHkpy",
+  "Amount": "10000",
   "FinishAfter": 533171558,
   "Fee": "20",
   "NetworkID": 21337,

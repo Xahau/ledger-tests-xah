@@ -21,3 +21,8 @@ export function saveBinary(filepath: string, hex: string): void {
   const bufferFromHex: Buffer = Buffer.from(hex, 'hex')
   writeToFile(filepath, bufferFromHex)
 }
+
+// 'tests/testcases/01-payment/01-basic.json'
+export function saveJson(filepath: string, json: any): void {
+  fs.writeFileSync(filepath, JSON.stringify(json, null, 2))
+}

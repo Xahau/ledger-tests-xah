@@ -7,5 +7,5 @@
   "NetworkID": 21337,
   "Flags": 0,
   "Sequence": 7,
-  "SigningPubKey": ""
+  "SigningPubKey": "OWN_PUBKEY"
 }

@@ -35,6 +35,25 @@ const ignoreFields = ['SigningPubKey', 'Sequence']
 // Helper function to format the amount
 // function formatPaths(paths: any) {}
 
+function forceParseCurrency(currency: string) {
+  switch (currency) {
+    case '0000000000000000000000003E2E3C0000000000':
+      return '>.<'
+    default:
+      throw Error('Unknown Force Currency')
+  }
+}
+
+function formatCurrency(currency: string) {
+  if (currency.length > 3) {
+    if (currency.includes('000000000000000000000000')) {
+      return `${forceParseCurrency(currency)}`
+    }
+    return currency.toLowerCase()
+  }
+  return currency
+}
+
 // Helper function to format the amount
 function formatAmount(amount: any) {
   if (typeof amount === 'string') {
@@ -44,7 +63,10 @@ function formatAmount(amount: any) {
       : 0
     return `XAH ${xrpAmount.toFixed(decimals)}`
   }
-  if (amount.currency > 3) {
+  if (amount.currency.length > 3) {
+    if (amount.currency.includes('000000000000000000000000')) {
+      return `${forceParseCurrency(amount.currency)} ${amount.value}`
+    }
     return amount.value
   }
   return `${amount.currency} ${amount.value}`
@@ -60,13 +82,31 @@ function formatFee(fee: string) {
   return `XAH ${xrpFee.toFixed(decimals)}`
 }
 
-// Helper function to format the account and destination
-function formatAccount(account: string) {
-  // Insert spaces every 12 characters for readability
-  if (account.length === 33) {
-    return account.replace(/(.{11})/g, '  $1   ')
+function formatAccount33(address: string): string {
+  // Extract parts of the address based on the desired indices
+  const part1 = address.substring(0, 11) // First 11 characters
+  const part2 = address.substring(11, 22) // Next 11 characters
+  const part3 = address.substring(22) // Remaining characters
+
+  // Concatenate parts with spaces
+  return `  ${part1}     ${part2}     ${part3}   `
+}
+
+function formatAccount34(address: string): string {
+  // Extract parts of the address based on the desired indices
+  const part1 = address.substring(0, 12) // First 12 characters
+  const part2 = address.substring(12, 23) // Next 11 characters
+  const part3 = address.substring(23) // Remaining characters
+
+  // Concatenate parts with spaces
+  return `  ${part1}    ${part2}     ${part3}   `
+}
+
+function formatAccount(address: string): string {
+  if (address.length === 34) {
+    return formatAccount34(address)
   }
-  return account.replace(/(.{12})/g, '  $1   ')
+  return formatAccount33(address)
 }
 
 function formatPathCurrency(i: number, ii: number, element: any) {
@@ -79,6 +119,12 @@ function formatPathAccount(i: number, ii: number, element: any) {
   return `Account [P${i}: S${ii}]; ${formatAccount(element.account)}\n`
 }
 function formatMemoData(i: number, element: any) {
+  if (element.MemoData.length >= 124) {
+    return `Memo Data [${i}]; ${element.MemoData.slice(
+      0,
+      124
+    ).toLowerCase()}...\n`
+  }
   return `Memo Data [${i}]; ${convertHexToString(element.MemoData)}\n`
 }
 function formatMemoFormat(i: number, element: any) {
@@ -94,13 +140,19 @@ function formatParamValue(i: number, element: any) {
   return `Hook Param Value [${i}]; ${element.HookParameterValue}\n`
 }
 function formatSignerPK(i: number, element: any) {
-  return `Sig.PubKey [${i}]; ${element.TxnSignature}\n`
+  return `Sig.PubKey [${i}]; ${element.SigningPubKey.toLowerCase()}\n`
 }
 function formatSignerTxn(i: number, element: any) {
-  return `Txn Sig. [${i}]; ${element.SigningPubKey}\n`
+  if (element.TxnSignature.length >= 124) {
+    return `Txn Sig. [${i}]; ${element.TxnSignature.slice(
+      0,
+      124
+    ).toLowerCase()}...\n`
+  }
+  return `Txn Sig. [${i}]; ${element.TxnSignature.toLowerCase()}\n`
 }
 function formatSignerAccount(i: number, element: any) {
-  return `Account [${i}]; ${element.Account}\n`
+  return `Account [${i}]; ${formatAccount(element.Account)}\n`
 }
 
 const filterMultisign = [
@@ -233,14 +285,14 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < memos.length; i++) {
                     const element = memos[i].Memo
                     const _i = i + 1
-                    if (element.MemoData) {
-                      textFile.write(formatMemoData(_i, element))
-                    }
                     if (element.MemoType) {
                       textFile.write(formatMemoType(_i, element))
                     }
                     if (element.MemoFormat) {
                       textFile.write(formatMemoFormat(_i, element))
+                    }
+                    if (element.MemoData) {
+                      textFile.write(formatMemoData(_i, element))
                     }
                   }
                   break
@@ -262,14 +314,14 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < signers.length; i++) {
                     const element = signers[i].Signer
                     const _i = i + 1
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
+                    }
                     if (element.SigningPubKey) {
                       textFile.write(formatSignerPK(_i, element))
                     }
                     if (element.TxnSignature) {
                       textFile.write(formatSignerTxn(_i, element))
-                    }
-                    if (element.Account) {
-                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break
@@ -321,10 +373,16 @@ async function processFixtures(address: string, publicKey: string) {
                   ) {
                     if (
                       // @ts-expect-error -- ignore
-                      value.currency.length > 3
-                    ) {
+                      value.currency.length > 3 &&
                       // @ts-expect-error -- ignore
-                      textFile.write(`Currency; ${value.currency}\n`)
+                      !value.currency.includes('000000000000000000000000')
+                    ) {
+                      textFile.write(
+                        `Currency; ${formatCurrency(
+                          // @ts-expect-error -- ignore
+                          value.currency as string
+                        )}\n`
+                      )
                     }
                     // @ts-expect-error -- ignore
                     textFile.write(`Issuer; ${formatAccount(value.issuer)}\n`)

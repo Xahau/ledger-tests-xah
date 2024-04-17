@@ -2,8 +2,8 @@ Transaction Type; Payment
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Amount; XAH 0.01
-Memo Data [1]; Lorem
 Memo Fmt [1]; Lorem
+Memo Data [1]; Lorem
 Fee; XAH 0.000015
 Network ID; 21337
 Last Ledger Sequence; 87108682

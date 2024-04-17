@@ -5,9 +5,9 @@ Network ID; 21337
 Source Tag; 888
 Account Txn ID; f02eb74cb4f5d2e6ac8be70cea41cca872e680f9efd2027605f0b42666037aa8
 Memo Data [1]; Developed by Towo Labs
-Memo Data [2]; Towo Labs <3 Hardware wallet
 Memo Type [2]; https://www.xrptoolkit.com
-Memo Data [3]; Towo Labs <3 The XRP Ledger & Interledger Protocol
+Memo Data [2]; Towo Labs <3 Hardware wallet
 Memo Type [3]; https://www.xrptoolkit.com
 Memo Fmt [3]; text/plain
+Memo Data [3]; Towo Labs <3 The XRP Ledger & Interledger Protocol
 Regular Key; rTooLkitCksh5mQa67eaa2JaWHDBnHkpy

@@ -3,7 +3,7 @@ Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy
 Fee; XAH 0.00001
 Network ID; 21337
 Amount; XAH 0.01
-Destination;   rf1BiGeXwwQo     i8Z2ueFYTEXS   wuJYfV2Jpn
+Destination;   rf1BiGeXwwQo    i8Z2ueFYTEX     SwuJYfV2Jpn   
 Settle Delay; 86400
 Public Key; 023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6
 Cancel After; 533171558

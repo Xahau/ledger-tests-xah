@@ -215,14 +215,18 @@ async function processFixtures(address: string, publicKey: string) {
                   }
                   break
                 case 'NetworkID':
+                  textFile.write(
+                    `${key.split('ID')[0]} ID; ${formattedValue}\n`
+                  )
+                  break
                 case 'InvoiceID':
                 case 'CheckID':
                 case 'EscrowID':
                 case 'OfferID':
                 case 'URITokenID':
-                  textFile.write(
-                    `${key.split('ID')[0]} ID; ${formattedValue}\n`
-                  )
+                  let _value = formattedValue as string
+                  _value = _value.toLowerCase()
+                  textFile.write(`${key.split('ID')[0]} ID; ${_value}\n`)
                   break
                 case 'AccountTxnID':
                   textFile.write(`Account Txn ID; ${formattedValue}\n`)

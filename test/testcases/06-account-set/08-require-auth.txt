@@ -2,4 +2,4 @@ Transaction Type; Account Set
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Fee; XAH 0.00001
 Network ID; 21337
-Set Flag; 2
+Set Flag; Require Auth

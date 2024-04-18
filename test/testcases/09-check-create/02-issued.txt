@@ -7,4 +7,4 @@ Destination Tag; 1
 Send Max; USD 18446700000000000000000000000000000000000000000000
 Issuer;   r9cZA1mLK5R5    Am25ArfXFmq     gNwjZgnfk59   
 Destination;   rBKz5MC2iXdo    S3XgnNSYmF6     9K1Yo4NS3Ws   
-Expiration; 570113521
+Expiration; 2018-01-24 12:52:01 UTC

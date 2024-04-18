@@ -10,4 +10,4 @@ Memo Data [2]; Towo Labs <3 Hardware wallet
 Memo Type [3]; https://www.xrptoolkit.com
 Memo Fmt [3]; text/plain
 Memo Data [3]; Towo Labs <3 The XRP Ledger & Interledger Protocol
-Regular Key; rTooLkitCksh5mQa67eaa2JaWHDBnHkpy
+Regular Key;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

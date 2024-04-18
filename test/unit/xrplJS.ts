@@ -1,4 +1,5 @@
 import {
+  AccountSetAsfFlags,
   AccountSetTfFlags,
   OfferCreateFlags,
   PaymentChannelClaimFlags,
@@ -8,28 +9,30 @@ import {
   TrustSetFlags,
   URITokenMintFlags,
 } from '@transia/xrpl'
-import { AccountRootFlags } from '@transia/xrpl/dist/npm/models/ledger'
 
 export enum ClaimRewardFlags {
   tfOptOut = 1,
 }
 
-export enum AccountRootStringFlags {
-  lsfPasswordSpent = 'Password Spent',
-  lsfRequireDestTag = 'Require Dest',
-  lsfRequireAuth = 'Require Auth',
-  lsfDisallowXRP = 'Disallow XAH',
-  lsfDisableMaster = 'Disable Master',
-  lsfNoFreeze = 'No Freeze',
-  lsfGlobalFreeze = 'Global Freeze',
-  lsfDefaultRipple = 'Default Ripple',
-  lsfDepositAuth = 'Deposit Authorization',
-  lsfDisallowIncomingNFTokenOffer = 'Disallow NFT Offers',
-  lsfDisallowIncomingCheck = 'Disallow Checks',
-  lsfDisallowIncomingPayChan = 'Disallow Pay. Channels',
-  lsfDisallowIncomingTrustline = 'Disallow Trustlines',
-  lsfURITokenIssuer = 'URI Token Issuer',
-  lsfDisallowIncomingRemit = 'Disallow Remits',
+export enum AccountAsfStringFlags {
+  asfPasswordSpent = 'Password Spent',
+  asfRequireDest = 'Require Dest',
+  asfRequireAuth = 'Require Auth',
+  asfDisallowXRP = 'Disallow XAH',
+  asfDisableMaster = 'Disable Master',
+  asfNoFreeze = 'No Freeze',
+  asfGlobalFreeze = 'Global Freeze',
+  asfDefaultRipple = 'Default Ripple',
+  asfDepositAuth = 'Deposit Auth',
+  asfDisallowIncomingNFTokenOffer = 'Disallow NFT Offers',
+  asfDisallowIncomingCheck = 'Disallow Checks',
+  asfDisallowIncomingPayChan = 'Disallow Pay. Channels',
+  asfDisallowIncomingTrustline = 'Disallow Trustlines',
+  asfAuthorizedNFTokenMinter = 'Authorized NFToken Minter',
+  asfURITokenIssuer = 'URI Token Issuer',
+  asfDisallowIncomingRemit = 'Disallow Remits',
+  asfTshCollect = 'TSH Collect',
+  asfAccountTxnID = 'Track Txn ID',
 }
 
 export enum AccountSetStringFlags {
@@ -125,31 +128,6 @@ export function paymentFlagsToString(flags: number): string {
 export function accountRootFlagsToString(flags: number): string {
   let flagsString = ''
   let count = 0
-  Object.keys(AccountRootFlags).forEach((flag: string) => {
-    if (
-      typeof flag === 'string' &&
-      isFlagEnabled(
-        flags,
-        AccountRootFlags[flag as keyof typeof AccountRootFlags]
-      )
-    ) {
-      if (count > 0) {
-        flagsString +=
-          ', ' + AccountRootStringFlags[flag as keyof typeof AccountRootFlags]
-      } else {
-        flagsString +=
-          AccountRootStringFlags[flag as keyof typeof AccountRootFlags]
-      }
-      count += 1
-    }
-  })
-
-  return flagsString
-}
-
-export function accountSetFlagsToString(flags: number): string {
-  let flagsString = ''
-  let count = 0
   Object.keys(AccountSetTfFlags).forEach((flag: string) => {
     if (
       typeof flag === 'string' &&
@@ -170,6 +148,11 @@ export function accountSetFlagsToString(flags: number): string {
   })
 
   return flagsString
+}
+
+export function accountSetFlagsToString(flags: number): string {
+  const flag = AccountSetAsfFlags[flags]
+  return AccountAsfStringFlags[flag as keyof typeof AccountSetAsfFlags]
 }
 
 export function offerCreateFlagsToString(flags: number): string {

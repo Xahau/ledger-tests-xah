@@ -1,4 +1,4 @@
-import { convertHexToString, decode } from '@transia/xrpl'
+import { convertHexToString, decode, rippleTimeToUnixTime } from '@transia/xrpl'
 import { blobTransaction } from '../../dist/npm/src'
 // xrpl-helpers
 import { saveBinary, saveJson } from '../tools'
@@ -6,6 +6,7 @@ import fs from 'fs'
 import path from 'path'
 import util from 'util'
 import {
+  accountRootFlagsToString,
   accountSetFlagsToString,
   claimRewardFlagsToString,
   offerCreateFlagsToString,
@@ -19,21 +20,7 @@ const readdir = util.promisify(fs.readdir)
 const stat = util.promisify(fs.stat)
 const readFile = util.promisify(fs.readFile)
 
-const ignoreFields = ['SigningPubKey', 'Sequence']
-// const ignoreFormats = [
-//   'URI',
-//   'SigningPubKey',
-//   'NetworkID',
-//   'InvoiceID',
-//   'AccountTxnID',
-//   'CheckID',
-//   'EscrowID',
-//   'OfferID',
-//   'URITokenID',
-// ]
-
-// Helper function to format the amount
-// function formatPaths(paths: any) {}
+const ignoreFields = ['SigningPubKey', 'Sequence', 'LastLedgerSequence']
 
 function forceParseCurrency(currency: string) {
   switch (currency) {
@@ -236,6 +223,37 @@ function formatTT(tt: string) {
   }
 }
 
+function formatTimestamp(timestamp: number): string {
+  const date = new Date(timestamp)
+
+  const year = date.getUTCFullYear() // Get the year as a four digit number (yyyy)
+  const month = date.getUTCMonth() + 1 // getUTCMonth() returns month from 0-11
+  const day = date.getUTCDate()
+  const hours = date.getUTCHours()
+  const minutes = date.getUTCMinutes()
+  const seconds = date.getUTCSeconds()
+
+  // Pad the month, day, hours, minutes, and seconds with leading zeros if necessary
+  const formattedMonth = month < 10 ? `0${month}` : month
+  const formattedDay = day < 10 ? `0${day}` : day
+  const formattedHours = hours < 10 ? `0${hours}` : hours
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds
+
+  // Construct the formatted date string
+  return `${year}-${formattedMonth}-${formattedDay} ${formattedHours}:${formattedMinutes}:${formattedSeconds} UTC`
+}
+
+function formatDate(value: number) {
+  return formatTimestamp(rippleTimeToUnixTime(value))
+}
+
+function formatPercentage(value: number): string {
+  const scaledValue = value / 1e16
+  const formattedPercentage = scaledValue.toFixed(7) + ' %'
+  return formattedPercentage
+}
+
 const filterMultisign = [
   '17-multi-sign-parallel.json',
   '18-multi-sign-serial.json',
@@ -261,6 +279,8 @@ async function processFixtures(address: string, publicKey: string) {
             // Parse the JSON content
             const jsonData = JSON.parse(fileContent)
             // Loop through the JSON fields
+
+            const additionalValues: any[] = []
             for (const [key, value] of Object.entries(jsonData)) {
               if (ignoreFields.includes(key)) {
                 continue
@@ -269,6 +289,11 @@ async function processFixtures(address: string, publicKey: string) {
 
               // Format
               switch (key) {
+                case 'FinishAfter':
+                case 'CancelAfter':
+                case 'Expiration':
+                  formattedValue = formatDate(value as any)
+                  break
                 case 'DeliverMax':
                 case 'DeliverMin':
                 case 'SendMax':
@@ -276,10 +301,14 @@ async function processFixtures(address: string, publicKey: string) {
                 case 'TakerGets':
                 case 'Balance':
                 case 'Amount':
+                case 'LimitAmount':
                   formattedValue = formatAmount(value as any)
                   break
                 case 'Fee':
                   formattedValue = formatFee(value as string)
+                  break
+                case 'TransferRate':
+                  formattedValue = formatPercentage(value as number)
                   break
                 case 'Account':
                   const accountValue = (value as string).replace(
@@ -291,6 +320,9 @@ async function processFixtures(address: string, publicKey: string) {
                 case 'Owner':
                 case 'Destination':
                 case 'Issuer':
+                case 'RegularKey':
+                case 'Authorize':
+                case 'Unauthorize':
                   formattedValue = formatAccount(value as string)
                   break
               }
@@ -298,6 +330,12 @@ async function processFixtures(address: string, publicKey: string) {
               // Write to File
               switch (key) {
                 case 'TransactionType':
+                  if (
+                    formattedValue === 'SetRegularKey' &&
+                    !jsonData.RegularKey
+                  ) {
+                    additionalValues.push({ 'Regular Key': '[empty]' })
+                  }
                   textFile.write(
                     `Transaction Type; ${formatTT(formattedValue as string)}\n`
                   )
@@ -313,7 +351,7 @@ async function processFixtures(address: string, publicKey: string) {
                     textFile.write(`Flags; ${flagsString}\n`)
                   }
                   if (jsonData.TransactionType === 'AccountSet') {
-                    const flagsString = accountSetFlagsToString(
+                    const flagsString = accountRootFlagsToString(
                       formattedValue as number
                     )
                     textFile.write(`Flags; ${flagsString}\n`)
@@ -347,6 +385,22 @@ async function processFixtures(address: string, publicKey: string) {
                       formattedValue as number
                     )
                     textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  break
+                case 'SetFlag':
+                  if (jsonData.TransactionType === 'AccountSet') {
+                    const flagsString = accountSetFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Set Flag; ${flagsString}\n`)
+                  }
+                  break
+                case 'ClearFlag':
+                  if (jsonData.TransactionType === 'AccountSet') {
+                    const flagsString = accountSetFlagsToString(
+                      formattedValue as number
+                    )
+                    textFile.write(`Clear Flag; ${flagsString}\n`)
                   }
                   break
                 case 'Paths':
@@ -434,6 +488,66 @@ async function processFixtures(address: string, publicKey: string) {
                     ).toLowerCase()}\n`
                   )
                   break
+                case 'Condition':
+                  textFile.write(
+                    `Condition; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'Channel':
+                  textFile.write(
+                    `Channel; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'Signature':
+                  if ((formattedValue as string).length >= 124) {
+                    textFile.write(
+                      `Signature; ${(formattedValue as string)
+                        .slice(0, 124)
+                        .toLowerCase()}...\n`
+                    )
+                    break
+                  }
+                  textFile.write(
+                    `Signature; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'PublicKey':
+                  textFile.write(
+                    `Public Key; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'Fulfillment':
+                  textFile.write(
+                    `Fulfillment; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'Domain':
+                  textFile.write(
+                    `Domain; ${convertHexToString(formattedValue as string)}\n`
+                  )
+                  break
+                case 'EmailHash':
+                  textFile.write(
+                    `Email Hash; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'MessageKey':
+                  textFile.write(
+                    `Message Key; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'WalletLocator':
+                  textFile.write(
+                    `Wallet Locator; ${(
+                      formattedValue as string
+                    ).toLowerCase()}\n`
+                  )
+                  break
+                case 'SettleDelay':
+                  textFile.write(
+                    `Settle Delay; ${formattedValue as number} s\n`
+                  )
+                  break
                 case 'URI':
                   textFile.write(
                     `URI; ${(formattedValue as string).toLowerCase()}\n`
@@ -454,7 +568,8 @@ async function processFixtures(address: string, publicKey: string) {
                       key === 'TakerPays' ||
                       key === 'TakerGets' ||
                       key === 'Balance' ||
-                      key === 'Amount') &&
+                      key === 'Amount' ||
+                      key === 'LimitAmount') &&
                     typeof value === 'object'
                   ) {
                     if (
@@ -475,6 +590,13 @@ async function processFixtures(address: string, publicKey: string) {
                   }
                   break
               }
+            }
+            for (let index = 0; index < additionalValues.length; index++) {
+              const element = additionalValues[index]
+              Object.keys(element).forEach((key) => {
+                const value = element[key]
+                textFile.write(`${key}; ${value}\n`)
+              })
             }
             textFile.end()
             const ledgerRaw = await blobTransaction(

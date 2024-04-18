@@ -31,4 +31,3 @@ Memo Data [1]; 4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e736
 Fee; XAH 2
 Network ID; 21337
 Flags; No Direct Ripple, Partial Payment, Limit Quality
-Last Ledger Sequence; 87108682

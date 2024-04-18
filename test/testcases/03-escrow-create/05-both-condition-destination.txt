@@ -3,8 +3,8 @@ Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy
 Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Destination Tag; 1337
 Amount; XAH 0.01
-Cancel After; 533257958
-Finish After; 533171558
-Condition; A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100
+Cancel After; 2016-11-23 23:12:38 UTC
+Finish After; 2016-11-22 23:12:38 UTC
+Condition; a0258020e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855810100
 Fee; XAH 0.00002
 Network ID; 21337

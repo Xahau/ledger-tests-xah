@@ -2,4 +2,5 @@ Transaction Type; Set Trust Line
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Fee; XAH 0.00001
 Network ID; 21337
-Limit Amount; [object Object]
+Limit Amount; SEK 18937964132
+Issuer;   rsP3mgGb2tcY    UrxiLFiHJiQ     XhsziegtwBc   

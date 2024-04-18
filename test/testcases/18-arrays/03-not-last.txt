@@ -8,4 +8,3 @@ Memo Fmt [1]; Lorem
 Memo Data [1]; Lorem
 Fee; XAH 0.000015
 Network ID; 21337
-Last Ledger Sequence; 87108682

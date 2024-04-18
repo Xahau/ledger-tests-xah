@@ -458,8 +458,8 @@ async function processFixtures(address: string, publicKey: string) {
                       const __element = _element[ii]
                       const _ii = ii + 1
                       if (__element.issuer !== undefined) {
-                        textFile.write(formatPathIssuer(_i, _ii, __element))
                         textFile.write(formatPathCurrency(_i, _ii, __element))
+                        textFile.write(formatPathIssuer(_i, _ii, __element))
                       } else {
                         textFile.write(formatPathAccount(_i, _ii, __element))
                       }
@@ -474,11 +474,11 @@ async function processFixtures(address: string, publicKey: string) {
                     if (element.MemoType) {
                       textFile.write(formatMemoType(_i, element))
                     }
-                    if (element.MemoData) {
-                      textFile.write(formatMemoData(_i, element))
-                    }
                     if (element.MemoFormat) {
                       textFile.write(formatMemoFormat(_i, element))
+                    }
+                    if (element.MemoData) {
+                      textFile.write(formatMemoData(_i, element))
                     }
                   }
                   break
@@ -487,23 +487,23 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < hooks.length; i++) {
                     const element = hooks[i].Hook
                     const _i = i + 1
-                    if (element.HookApiVersion !== undefined) {
-                      textFile.write(formatHookApiVersion(_i, element))
-                    }
-                    if (element.Flags) {
-                      textFile.write(formatHookFlags(_i, element))
-                    }
-                    if (element.HookOn) {
-                      textFile.write(formatHookOn(_i, element))
-                    }
-                    if (element.HookNamespace) {
-                      textFile.write(formatHookNamespace(_i, element))
-                    }
                     if (element.CreateCode !== undefined) {
                       textFile.write(formatCreateCode(_i, element))
                     }
                     if (element.HookHash) {
                       textFile.write(formatHookHash(_i, element))
+                    }
+                    if (element.HookNamespace) {
+                      textFile.write(formatHookNamespace(_i, element))
+                    }
+                    if (element.HookOn) {
+                      textFile.write(formatHookOn(_i, element))
+                    }
+                    if (element.HookApiVersion !== undefined) {
+                      textFile.write(formatHookApiVersion(_i, element))
+                    }
+                    if (element.Flags) {
+                      textFile.write(formatHookFlags(_i, element))
                     }
                     if (element.HookParameters) {
                       const hookParams = element.HookParameters
@@ -540,11 +540,11 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < sentrier.length; i++) {
                     const element = sentrier[i].SignerEntry
                     const _i = i + 1
-                    if (element.SignerWeight) {
-                      textFile.write(formatSignerWeight(_i, element))
-                    }
                     if (element.Account) {
                       textFile.write(formatSignerAccount(_i, element))
+                    }
+                    if (element.SignerWeight) {
+                      textFile.write(formatSignerWeight(_i, element))
                     }
                   }
                   break
@@ -566,14 +566,14 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < signers.length; i++) {
                     const element = signers[i].Signer
                     const _i = i + 1
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
+                    }
                     if (element.SigningPubKey) {
                       textFile.write(formatSignerPK(_i, element))
                     }
                     if (element.TxnSignature) {
                       textFile.write(formatSignerTxn(_i, element))
-                    }
-                    if (element.Account) {
-                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break

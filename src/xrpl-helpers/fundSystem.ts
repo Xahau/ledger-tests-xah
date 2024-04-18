@@ -112,4 +112,9 @@ export async function fundSystem(
   await fund(client, wallet, new ICXRP(20000), ...needsFunding)
   await trust(client, USD.set(100000), ...needsLines)
   await pay(client, USD.set(50000), gw.wallet, ...needsIC)
+
+  const destAddress = 'rTooLkitCksh5mQa67eaa2JaWHDBnHkpy'
+  if ((await balance(client, destAddress)) < 1000) {
+    await fund(client, wallet, new ICXRP(10000), ...[destAddress])
+  }
 }

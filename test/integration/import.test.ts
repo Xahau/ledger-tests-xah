@@ -31,7 +31,6 @@ describe('Import', () => {
       ledgerContext,
       'test/testcases/20-import/01-basic.json'
     )
-    await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)
@@ -42,7 +41,6 @@ describe('Import', () => {
       ledgerContext,
       'test/testcases/21-import/02-isser.json'
     )
-    await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)

@@ -30,7 +30,6 @@ describe('Payment', () => {
   it('payment - basic', async () => {
     const filepath = 'test/testcases/01-payment/01-basic.json'
     const txBlob = await testTransaction(testContext, ledgerContext, filepath)
-    await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)

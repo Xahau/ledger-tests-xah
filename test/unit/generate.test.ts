@@ -1,7 +1,7 @@
 import { convertHexToString, decode, rippleTimeToUnixTime } from '@transia/xrpl'
 import { blobTransaction } from '../../dist/npm/src'
 // xrpl-helpers
-import { saveBinary, saveJson } from '../tools'
+import { saveBinary } from '../tools'
 import fs from 'fs'
 import path from 'path'
 import util from 'util'
@@ -726,7 +726,7 @@ async function processFixtures(address: string, publicKey: string) {
             if (!isMultiSign) {
               decoded.SigningPubKey = 'OWN_PUBKEY'
             }
-            saveJson(filepath, decoded)
+            // saveJson(filepath, decoded)
             saveBinary(filepath.replace('.json', '.raw'), ledgerRaw)
           }
         }

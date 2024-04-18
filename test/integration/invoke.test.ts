@@ -31,7 +31,6 @@ describe('Invoke', () => {
       ledgerContext,
       'test/testcases/21-invoke/01-basic.json'
     )
-    await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)
@@ -42,7 +41,6 @@ describe('Invoke', () => {
       ledgerContext,
       'test/testcases/21-invoke/02-blob.json'
     )
-    await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')
     await close(testContext.client)

@@ -9,16 +9,15 @@ import {
   XrplIntegrationTestContext,
   setupClient,
   teardownClient,
-  serverUrl,
-  close,
-} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
+} from '../../dist/npm/src/xrpl-helpers/setup'
+import { close } from '../../dist/npm/src/xrpl-helpers/tools'
 
 describe('SetHook', () => {
   let ledgerContext: LedgerTestContext
   let testContext: XrplIntegrationTestContext
 
   beforeAll(async () => {
-    testContext = await setupClient(serverUrl)
+    testContext = await setupClient()
     ledgerContext = await setupLedger(testContext)
   })
   afterAll(async () => {
@@ -30,7 +29,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/01-noop.json'
+  //     'test/testcases/XX-set-hook/01-noop.json'
   //   )
   //   const response = await testContext.client.submit(txBlob)
   //   expect(response.result.engine_result).toMatch('tesSUCCESS')
@@ -40,7 +39,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/02-create.json'
+  //     'test/testcases/XX-set-hook/02-create.json'
   //   )
   //   console.log(txBlob)
 
@@ -52,7 +51,7 @@ describe('SetHook', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/XX-set-hook/03-create-params.json'
+      'test/testcases/XX-set-hook/03-create-params.json'
     )
     console.log(txBlob)
 
@@ -64,7 +63,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/04-create-grants.json'
+  //     'test/testcases/XX-set-hook/04-create-grants.json'
   //   )
   //   console.log(txBlob)
 
@@ -76,7 +75,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/05-install.json'
+  //     'test/testcases/XX-set-hook/05-install.json'
   //   )
   //   console.log(txBlob)
 
@@ -88,7 +87,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/06-update.json'
+  //     'test/testcases/XX-set-hook/06-update.json'
   //   )
   //   console.log(txBlob)
 
@@ -100,7 +99,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/07-delete.json'
+  //     'test/testcases/XX-set-hook/07-delete.json'
   //   )
   //   console.log(txBlob)
 
@@ -112,7 +111,7 @@ describe('SetHook', () => {
   //   const txBlob = await testTransaction(
   //     testContext,
   //     ledgerContext,
-  //     'test/fixtures/XX-set-hook/08-delete-ns.json'
+  //     'test/testcases/XX-set-hook/08-delete-ns.json'
   //   )
   //   console.log(txBlob)
 

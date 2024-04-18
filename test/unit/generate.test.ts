@@ -12,6 +12,7 @@ import {
   offerCreateFlagsToString,
   paymentChannelClaimFlagsToString,
   paymentFlagsToString,
+  setHookFlagsToString,
   trustSetFlagsToString,
   uriTokenMintFlagsToString,
 } from './xrplJS'
@@ -121,10 +122,10 @@ function formatMemoType(i: number, element: any) {
   return `Memo Type [${i}]; ${convertHexToString(element.MemoType)}\n`
 }
 function formatParamName(i: number, element: any) {
-  return `Hook Param Name [${i}]; ${element.HookParameterName}\n`
+  return `Hook Param Name [${i}]; ${element.HookParameterName.toLowerCase()}\n`
 }
 function formatParamValue(i: number, element: any) {
-  return `Hook Param Value [${i}]; ${element.HookParameterValue}\n`
+  return `Hook Param Value [${i}]; ${element.HookParameterValue.toLowerCase()}\n`
 }
 function formatSignerPK(i: number, element: any) {
   return `Sig.PubKey [${i}]; ${element.SigningPubKey.toLowerCase()}\n`
@@ -140,6 +141,41 @@ function formatSignerTxn(i: number, element: any) {
 }
 function formatSignerAccount(i: number, element: any) {
   return `Account [${i}]; ${formatAccount(element.Account)}\n`
+}
+
+function formatSignerWeight(i: number, element: any) {
+  return `Signer Weight [${i}]; ${element.SignerWeight}\n`
+}
+
+function formatCreateCode(i: number, element: any) {
+  if (element.CreateCode === '') {
+    return `Create Code [${i}]; [empty]\n`
+  }
+  if (element.CreateCode.length >= 124) {
+    return `Create Code [${i}]; ${element.CreateCode.slice(
+      0,
+      124
+    ).toLowerCase()}...\n`
+  }
+  return `Create Code [${i}]; ${element.CreateCode.toLowerCase()}\n`
+}
+function formatHookNamespace(i: number, element: any) {
+  return `Hook Namespace [${i}]; ${element.HookNamespace.toLowerCase()}\n`
+}
+function formatHookOn(i: number, element: any) {
+  return `Hook On [${i}]; ${element.HookOn.toLowerCase()}\n`
+}
+function formatHookApiVersion(i: number, element: any) {
+  return `Hook Api Version [${i}]; ${element.HookApiVersion}\n`
+}
+function formatHookFlags(i: number, element: any) {
+  return `Flags [${i}]; ${setHookFlagsToString(element.Flags)}\n`
+}
+function formatHookHash(i: number, element: any) {
+  return `Hook Hash [${i}]; ${element.HookHash.toLowerCase()}\n`
+}
+function formatAuthorize(i: number, element: any) {
+  return `Authorize [${i}]; ${formatAccount(element.Authorize)}\n`
 }
 
 function formatTT(tt: string) {
@@ -250,8 +286,14 @@ function formatDate(value: number) {
 
 function formatPercentage(value: number): string {
   const scaledValue = value / 1e16
-  const formattedPercentage = scaledValue.toFixed(7) + ' %'
-  return formattedPercentage
+  return scaledValue.toFixed(7) + ' %'
+}
+function formatQuality(value: number): string {
+  const scaledValue = value / 10000000
+  const decimals = String(scaledValue).includes('.')
+    ? String(String(scaledValue).split('.').pop()).length
+    : 0
+  return scaledValue.toFixed(decimals) + ' %'
 }
 
 const filterMultisign = [
@@ -309,6 +351,10 @@ async function processFixtures(address: string, publicKey: string) {
                   break
                 case 'TransferRate':
                   formattedValue = formatPercentage(value as number)
+                  break
+                case 'QualityIn':
+                case 'QualityOut':
+                  formattedValue = formatQuality(value as number)
                   break
                 case 'Account':
                   const accountValue = (value as string).replace(
@@ -412,8 +458,8 @@ async function processFixtures(address: string, publicKey: string) {
                       const __element = _element[ii]
                       const _ii = ii + 1
                       if (__element.issuer !== undefined) {
-                        textFile.write(formatPathCurrency(_i, _ii, __element))
                         textFile.write(formatPathIssuer(_i, _ii, __element))
+                        textFile.write(formatPathCurrency(_i, _ii, __element))
                       } else {
                         textFile.write(formatPathAccount(_i, _ii, __element))
                       }
@@ -428,11 +474,77 @@ async function processFixtures(address: string, publicKey: string) {
                     if (element.MemoType) {
                       textFile.write(formatMemoType(_i, element))
                     }
+                    if (element.MemoData) {
+                      textFile.write(formatMemoData(_i, element))
+                    }
                     if (element.MemoFormat) {
                       textFile.write(formatMemoFormat(_i, element))
                     }
-                    if (element.MemoData) {
-                      textFile.write(formatMemoData(_i, element))
+                  }
+                  break
+                case 'Hooks':
+                  const hooks = value as any[]
+                  for (let i = 0; i < hooks.length; i++) {
+                    const element = hooks[i].Hook
+                    const _i = i + 1
+                    if (element.HookApiVersion !== undefined) {
+                      textFile.write(formatHookApiVersion(_i, element))
+                    }
+                    if (element.Flags) {
+                      textFile.write(formatHookFlags(_i, element))
+                    }
+                    if (element.HookOn) {
+                      textFile.write(formatHookOn(_i, element))
+                    }
+                    if (element.HookNamespace) {
+                      textFile.write(formatHookNamespace(_i, element))
+                    }
+                    if (element.CreateCode !== undefined) {
+                      textFile.write(formatCreateCode(_i, element))
+                    }
+                    if (element.HookHash) {
+                      textFile.write(formatHookHash(_i, element))
+                    }
+                    if (element.HookParameters) {
+                      const hookParams = element.HookParameters
+                      for (let i = 0; i < hookParams.length; i++) {
+                        const _element = hookParams[i].HookParameter
+                        const _i = i + 1
+                        if (_element.HookParameterName) {
+                          textFile.write(formatParamName(_i, _element))
+                        }
+                        if (_element.HookParameterValue) {
+                          textFile.write(formatParamValue(_i, _element))
+                        }
+                      }
+                      break
+                    }
+                    if (element.HookGrants) {
+                      const hookParams = element.HookGrants
+                      for (let i = 0; i < hookParams.length; i++) {
+                        const _element = hookParams[i].HookGrant
+                        const _i = i + 1
+                        if (_element.HookHash) {
+                          textFile.write(formatHookHash(_i, _element))
+                        }
+                        if (_element.Authorize) {
+                          textFile.write(formatAuthorize(_i, _element))
+                        }
+                      }
+                      break
+                    }
+                  }
+                  break
+                case 'SignerEntries':
+                  const sentrier = value as any[]
+                  for (let i = 0; i < sentrier.length; i++) {
+                    const element = sentrier[i].SignerEntry
+                    const _i = i + 1
+                    if (element.SignerWeight) {
+                      textFile.write(formatSignerWeight(_i, element))
+                    }
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break
@@ -454,14 +566,14 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < signers.length; i++) {
                     const element = signers[i].Signer
                     const _i = i + 1
-                    if (element.Account) {
-                      textFile.write(formatSignerAccount(_i, element))
-                    }
                     if (element.SigningPubKey) {
                       textFile.write(formatSignerPK(_i, element))
                     }
                     if (element.TxnSignature) {
                       textFile.write(formatSignerTxn(_i, element))
+                    }
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break
@@ -519,6 +631,11 @@ async function processFixtures(address: string, publicKey: string) {
                 case 'Fulfillment':
                   textFile.write(
                     `Fulfillment; ${(formattedValue as string).toLowerCase()}\n`
+                  )
+                  break
+                case 'Blob':
+                  textFile.write(
+                    `Blob; ${(formattedValue as string).toLowerCase()}\n`
                   )
                   break
                 case 'Domain':

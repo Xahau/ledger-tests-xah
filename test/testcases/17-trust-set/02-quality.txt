@@ -4,5 +4,5 @@ Fee; XAH 0.00001
 Network ID; 21337
 Limit Amount; L4p 1230000000
 Issuer;   rsP3mgGb2tcY    UrxiLFiHJiQ     XhsziegtwBc   
-Quality In; 4294000000
-Quality Out; 980000000
+Quality In; 429.4 %
+Quality Out; 98 %

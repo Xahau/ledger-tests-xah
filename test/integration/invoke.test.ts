@@ -9,16 +9,15 @@ import {
   XrplIntegrationTestContext,
   setupClient,
   teardownClient,
-  serverUrl,
-  close,
-} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
+} from '../../dist/npm/src/xrpl-helpers/setup'
+import { close } from '../../dist/npm/src/xrpl-helpers/tools'
 
 describe('Invoke', () => {
   let ledgerContext: LedgerTestContext
   let testContext: XrplIntegrationTestContext
 
   beforeAll(async () => {
-    testContext = await setupClient(serverUrl)
+    testContext = await setupClient()
     ledgerContext = await setupLedger(testContext)
   })
   afterAll(async () => {
@@ -30,7 +29,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/21-invoke/01-basic.json'
+      'test/testcases/21-invoke/01-basic.json'
     )
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
@@ -41,7 +40,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/21-invoke/02-blob.json'
+      'test/testcases/21-invoke/02-blob.json'
     )
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)
@@ -52,7 +51,7 @@ describe('Invoke', () => {
     const txBlob = await testTransaction(
       testContext,
       ledgerContext,
-      'test/fixtures/21-invoke/03-params.json'
+      'test/testcases/21-invoke/03-params.json'
     )
     const response = await testContext.client.submit(txBlob)
     expect(response.result.engine_result).toMatch('tesSUCCESS')

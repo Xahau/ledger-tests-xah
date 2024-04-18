@@ -2,7 +2,7 @@
 
 ### Run Standalone
 
-`xrpld-netgen up:standalone --network_id=21338`
+`xrpld-netgen up:standalone --network_id=21337`
 
 ## Building XAH Ledger App
 

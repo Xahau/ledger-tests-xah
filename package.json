@@ -12,12 +12,15 @@
   "dependencies": {
     "@ledgerhq/hw-app-xrp": "^6.28.0",
     "@ledgerhq/hw-transport-node-speculos": "^6.28.0",
-    "@transia/hooks-toolkit": "^1.0.8",
-    "@transia/xrpl": "^2.7.3-alpha.19"
+    "@transia/xrpl": "^2.7.3-alpha.26",
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
     "@types/jest": "^29.5.0",
+    "@types/lodash": "^4.17.0",
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",

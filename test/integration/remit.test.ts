@@ -12,9 +12,7 @@ import {
 } from '../../dist/npm/src/xrpl-helpers/setup'
 import { close } from '../../dist/npm/src/xrpl-helpers/tools'
 
-// Router: ACCEPT: success
-
-describe('Payment', () => {
+describe('Remit', () => {
   let ledgerContext: LedgerTestContext
   let testContext: XrplIntegrationTestContext
 
@@ -27,8 +25,8 @@ describe('Payment', () => {
     teardownLedger(ledgerContext)
   })
 
-  it('payment - basic', async () => {
-    const filepath = 'test/testcases/01-payment/01-basic.json'
+  it('remit - basic', async () => {
+    const filepath = 'test/fixtures/28-remit/01-activate.json'
     const txBlob = await testTransaction(testContext, ledgerContext, filepath)
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)

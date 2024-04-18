@@ -9,16 +9,15 @@ import {
   XrplIntegrationTestContext,
   setupClient,
   teardownClient,
-  serverUrl,
-  close,
-} from '@transia/hooks-toolkit/dist/npm/src/libs/xrpl-helpers'
+} from '../../dist/npm/src/xrpl-helpers/setup'
+import { close } from '../../dist/npm/src/xrpl-helpers/tools'
 
 describe('ClaimReward', () => {
   let ledgerContext: LedgerTestContext
   let testContext: XrplIntegrationTestContext
 
   beforeAll(async () => {
-    testContext = await setupClient(serverUrl)
+    testContext = await setupClient()
     ledgerContext = await setupLedger(testContext)
   })
   afterAll(async () => {
@@ -27,7 +26,7 @@ describe('ClaimReward', () => {
   })
 
   it('claim reward - basic', async () => {
-    const filepath = 'test/fixtures/19-claim-reward/01-basic.json'
+    const filepath = 'test/testcases/19-claim-reward/01-basic.json'
     const txBlob = await testTransaction(testContext, ledgerContext, filepath)
     await testContext.client.submit(txBlob)
     const response = await testContext.client.submit(txBlob)

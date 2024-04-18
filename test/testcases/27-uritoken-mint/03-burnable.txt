@@ -1,6 +1,6 @@
 Transaction Type; URIToken Mint
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.000015
 Network ID; 21337
 Flags; Burnable
+Fee; XAH 0.000015
 URI; 697066733a2f2f6275726e61626c65

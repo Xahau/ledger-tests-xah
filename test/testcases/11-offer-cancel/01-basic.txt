@@ -1,5 +1,5 @@
 Transaction Type; Cancel Offer
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Fee; XAH 0.00001
 Network ID; 21337
 Offer Sequence; 89
+Fee; XAH 0.00001

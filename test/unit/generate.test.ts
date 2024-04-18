@@ -312,7 +312,6 @@ async function processFixtures(address: string, publicKey: string) {
         for (const file of files) {
           if (file.endsWith('.json')) {
             const filepath = path.join(folderPath, file)
-            console.log(filepath)
             const name = filepath.split('/').pop() as string
             const isMultiSign = filterMultisign.includes(name)
             const textFilePath = filepath.replace('.json', '.txt')
@@ -320,14 +319,27 @@ async function processFixtures(address: string, publicKey: string) {
             const fileContent = await readFile(filepath, 'utf8')
             // Parse the JSON content
             const jsonData = JSON.parse(fileContent)
-            // Loop through the JSON fields
-
+            const ledgerRaw = await blobTransaction(
+              address,
+              publicKey,
+              filepath
+            )
+            const decodedJson = decode(ledgerRaw)
             const additionalValues: any[] = []
-            for (const [key, value] of Object.entries(jsonData)) {
+
+            textFile.write(
+              `Transaction Type; ${formatTT(
+                decodedJson.TransactionType as string
+              )}\n`
+            )
+            textFile.write(
+              `Account; ${formatAccount(decodedJson.Account as string)}\n`
+            )
+            for (const [key, value] of Object.entries(decodedJson)) {
               if (ignoreFields.includes(key)) {
                 continue
               }
-              let formattedValue = value
+              let formattedValue = value as unknown
 
               // Format
               switch (key) {
@@ -356,13 +368,13 @@ async function processFixtures(address: string, publicKey: string) {
                 case 'QualityOut':
                   formattedValue = formatQuality(value as number)
                   break
-                case 'Account':
-                  const accountValue = (value as string).replace(
-                    /OWN_ADDR/g,
-                    address
-                  )
-                  formattedValue = formatAccount(accountValue)
-                  break
+                // case 'Account':
+                //   const accountValue = (value as string).replace(
+                //     /OWN_ADDR/g,
+                //     address
+                //   )
+                //   formattedValue = formatAccount(accountValue)
+                //   break
                 case 'Owner':
                 case 'Destination':
                 case 'Issuer':
@@ -382,9 +394,8 @@ async function processFixtures(address: string, publicKey: string) {
                   ) {
                     additionalValues.push({ 'Regular Key': '[empty]' })
                   }
-                  textFile.write(
-                    `Transaction Type; ${formatTT(formattedValue as string)}\n`
-                  )
+                  break
+                case 'Account':
                   break
                 case 'Flags':
                   if ((formattedValue as number) === 0) {
@@ -716,11 +727,6 @@ async function processFixtures(address: string, publicKey: string) {
               })
             }
             textFile.end()
-            const ledgerRaw = await blobTransaction(
-              address,
-              publicKey,
-              filepath
-            )
             const decoded = decode(ledgerRaw)
             decoded.Account = 'OWN_ADDR'
             if (!isMultiSign) {

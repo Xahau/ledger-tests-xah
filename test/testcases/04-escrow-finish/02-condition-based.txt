@@ -1,8 +1,8 @@
 Transaction Type; Finish Escrow
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Owner;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
-Offer Sequence; 3
-Condition; a0258020e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855810100
-Fulfillment; a0028000
-Fee; XAH 0.0004
 Network ID; 21337
+Offer Sequence; 3
+Fee; XAH 0.0004
+Fulfillment; a0028000
+Condition; a0258020e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855810100
+Owner;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   

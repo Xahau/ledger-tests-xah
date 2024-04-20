@@ -103,6 +103,14 @@ export async function testTransaction(
 
   const transactionBlob = encode(preparedTx)
 
+  console.log(
+    util.inspect(transactionBlob, {
+      colors: true,
+      compact: false,
+      depth: Infinity,
+    })
+  )
+
   try {
     const signature = await ledgerContext.app.signTransaction(
       "44'/144'/0'/0/0",
@@ -111,7 +119,7 @@ export async function testTransaction(
     preparedTx.TxnSignature = signature.toUpperCase()
     return encode(preparedTx)
   } catch (error: any) {
-    console.log(error.message)
+    console.log(error)
 
     switch (error.statusText) {
       case 'UNKNOWN_ERROR':

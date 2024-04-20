@@ -52,26 +52,3 @@ docker run --rm -it -v $(pwd)/apps:/speculos/apps --publish 40000:40000 --publis
 ```
 
 Then open the browser: http://127.0.0.1:5000 or http://127.0.0.1:5001
-
-### Generating the Test Cases
-
-> Remeber to update the ripple-binary-codec st-object.js file to remove the sorting.
-
-```before
-let sorted = Object.keys(xAddressDecoded)
-    .map((f) => definitions.field[f])
-    .filter((f) => f !== undefined &&
-    xAddressDecoded[f.name] !== undefined &&
-    f.isSerialized)
-    .sort((a, b) => {
-    return a.ordinal - b.ordinal;
-});
-```
-
-```
-let sorted = Object.keys(xAddressDecoded)
-    .map((f) => definitions.field[f])
-    .filter((f) => f !== undefined &&
-    xAddressDecoded[f.name] !== undefined &&
-    f.isSerialized);
-```

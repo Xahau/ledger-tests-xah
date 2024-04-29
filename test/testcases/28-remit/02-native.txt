@@ -1,0 +1,6 @@
+Transaction Type; Unknown
+Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Network ID; 21337
+Fee; XAH 0.000015
+Destination;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
+Amounts; [object Object]

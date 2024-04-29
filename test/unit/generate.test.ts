@@ -149,7 +149,7 @@ function formatSignerWeight(i: number, element: any) {
 
 function formatCreateCode(i: number, element: any) {
   if (element.CreateCode === '') {
-    return `Create Code [${i}]; [empty]\n`
+    return `Create Code [${i}];  \n`
   }
   if (element.CreateCode.length >= 124) {
     return `Create Code [${i}]; ${element.CreateCode.slice(
@@ -246,6 +246,8 @@ function formatTT(tt: string) {
       return 'URIToken Create Offer'
     case 'URITokenCancelSellOffer':
       return 'URIToken Cancel Offer'
+    case 'Remit':
+      return 'Remit'
     case 'GenesisMint':
       return 'Genesis Mint'
     case 'Import':
@@ -485,11 +487,11 @@ async function processFixtures(address: string, publicKey: string) {
                     if (element.MemoType) {
                       textFile.write(formatMemoType(_i, element))
                     }
-                    if (element.MemoFormat) {
-                      textFile.write(formatMemoFormat(_i, element))
-                    }
                     if (element.MemoData) {
                       textFile.write(formatMemoData(_i, element))
+                    }
+                    if (element.MemoFormat) {
+                      textFile.write(formatMemoFormat(_i, element))
                     }
                   }
                   break
@@ -498,23 +500,23 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < hooks.length; i++) {
                     const element = hooks[i].Hook
                     const _i = i + 1
-                    if (element.CreateCode !== undefined) {
-                      textFile.write(formatCreateCode(_i, element))
-                    }
-                    if (element.HookHash) {
-                      textFile.write(formatHookHash(_i, element))
-                    }
-                    if (element.HookNamespace) {
-                      textFile.write(formatHookNamespace(_i, element))
-                    }
-                    if (element.HookOn) {
-                      textFile.write(formatHookOn(_i, element))
-                    }
                     if (element.HookApiVersion !== undefined) {
                       textFile.write(formatHookApiVersion(_i, element))
                     }
                     if (element.Flags) {
                       textFile.write(formatHookFlags(_i, element))
+                    }
+                    if (element.HookOn) {
+                      textFile.write(formatHookOn(_i, element))
+                    }
+                    if (element.HookNamespace) {
+                      textFile.write(formatHookNamespace(_i, element))
+                    }
+                    if (element.CreateCode !== undefined) {
+                      textFile.write(formatCreateCode(_i, element))
+                    }
+                    if (element.HookHash) {
+                      textFile.write(formatHookHash(_i, element))
                     }
                     if (element.HookParameters) {
                       const hookParams = element.HookParameters
@@ -551,11 +553,11 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < sentrier.length; i++) {
                     const element = sentrier[i].SignerEntry
                     const _i = i + 1
-                    if (element.Account) {
-                      textFile.write(formatSignerAccount(_i, element))
-                    }
                     if (element.SignerWeight) {
                       textFile.write(formatSignerWeight(_i, element))
+                    }
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break
@@ -577,14 +579,14 @@ async function processFixtures(address: string, publicKey: string) {
                   for (let i = 0; i < signers.length; i++) {
                     const element = signers[i].Signer
                     const _i = i + 1
-                    if (element.Account) {
-                      textFile.write(formatSignerAccount(_i, element))
-                    }
                     if (element.SigningPubKey) {
                       textFile.write(formatSignerPK(_i, element))
                     }
                     if (element.TxnSignature) {
                       textFile.write(formatSignerTxn(_i, element))
+                    }
+                    if (element.Account) {
+                      textFile.write(formatSignerAccount(_i, element))
                     }
                   }
                   break
@@ -654,6 +656,11 @@ async function processFixtures(address: string, publicKey: string) {
                     `Domain; ${convertHexToString(formattedValue as string)}\n`
                   )
                   break
+                case 'URI':
+                  textFile.write(
+                    `URI; ${convertHexToString(formattedValue as string)}\n`
+                  )
+                  break
                 case 'EmailHash':
                   textFile.write(
                     `Email Hash; ${(formattedValue as string).toLowerCase()}\n`
@@ -676,10 +683,59 @@ async function processFixtures(address: string, publicKey: string) {
                     `Settle Delay; ${formattedValue as number} s\n`
                   )
                   break
-                case 'URI':
+                case 'Amounts':
+                  const amounts = value as any[]
+                  for (let i = 0; i < amounts.length; i++) {
+                    const element = amounts[i].AmountEntry
+                    const _i = i + 1
+                    if (element.Amount) {
+                      const value = element.Amount
+                      textFile.write(
+                        `Amount [${_i}]; ${formatAmount(value as any)}\n`
+                      )
+                      if (typeof value === 'object') {
+                        if (
+                          value.currency.length > 3 &&
+                          !value.currency.includes('000000000000000000000000')
+                        ) {
+                          textFile.write(
+                            `Currency [${_i}]; ${formatCurrency(
+                              value.currency as string
+                            )}\n`
+                          )
+                        }
+                        textFile.write(
+                          `Issuer [${_i}]; ${formatAccount(value.issuer)}\n`
+                        )
+                      }
+                    }
+                  }
+                  break
+                case 'URITokenIDs':
                   textFile.write(
-                    `URI; ${(formattedValue as string).toLowerCase()}\n`
+                    `URIToken IDs; ${(formattedValue as string[]).length}\n`
                   )
+                  for (
+                    let index = 0;
+                    index < (formattedValue as string[]).length;
+                    index++
+                  ) {
+                    const element = (formattedValue as string[])[index]
+                    textFile.write(`URIToken ID; ${element.toLowerCase()}\n`)
+                  }
+                  break
+                case 'MintURIToken':
+                  const mint = formattedValue as any
+                  if (mint.Flags && mint.Flags !== 0) {
+                    const flagsString = uriTokenMintFlagsToString(
+                      mint.Flags as number
+                    )
+                    textFile.write(`Flags; ${flagsString}\n`)
+                  }
+                  if (mint.Digest) {
+                    textFile.write(`Digest; ${mint.Digest.toLowerCase()}\n`)
+                  }
+                  textFile.write(`URI; ${convertHexToString(mint.URI)}\n`)
                   break
                 default:
                   textFile.write(

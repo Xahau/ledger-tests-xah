@@ -2,5 +2,5 @@ Transaction Type; Set Hook
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Network ID; 21337
 Fee; XAH 0.00005
-Create Code [1]; [empty]
 Flags [1]; Override
+Create Code [1];  

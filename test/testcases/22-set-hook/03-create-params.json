@@ -16,7 +16,7 @@
         "HookParameters": [
           {
             "HookParameter": {
-              "HookParameterName": "697066733A2F2F4445414442454546697066733A2F2F44454144424545467878",
+              "HookParameterName": "CAFECAFE",
               "HookParameterValue": "DEADBEEF"
             }
           }

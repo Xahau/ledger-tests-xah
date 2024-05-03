@@ -211,7 +211,7 @@ function formatTT(tt: string) {
     case 'PaymentChannelFund':
       return 'Fund Channel'
     case 'PaymentChannelClaim':
-      return 'Channel Claim'
+      return 'Claim Channel'
     case 'CheckCreate':
       return 'Create Check'
     case 'CheckCash':
@@ -219,7 +219,7 @@ function formatTT(tt: string) {
     case 'CheckCancel':
       return 'Cancel Check'
     case 'DepositPreauth':
-      return 'Preauth. Deposit'
+      return 'Deposit Preauth.'
     case 'TrustSet':
       return 'Set Trust Line'
     case 'DeleteAccount':

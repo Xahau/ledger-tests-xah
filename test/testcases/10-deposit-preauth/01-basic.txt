@@ -1,4 +1,4 @@
-Transaction Type; Preauth. Deposit
+Transaction Type; Deposit Preauth.
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Network ID; 21337
 Fee; XAH 0.00001

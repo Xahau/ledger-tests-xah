@@ -1,4 +1,4 @@
-Transaction Type; Channel Claim
+Transaction Type; Claim Channel
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Network ID; 21337
 Channel; 5db01b7ffed6b67e6b0414ded11e051d2ee2b7619ce0eaa6286d67a3a4d5bdb3

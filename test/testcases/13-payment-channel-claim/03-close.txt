@@ -1,4 +1,4 @@
-Transaction Type; Channel Claim
+Transaction Type; Claim Channel
 Account;   rTooLkitCks     h5mQa67eaa2     JaWHDBnHkpy   
 Network ID; 21337
 Flags; Close

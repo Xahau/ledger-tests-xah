@@ -7,9 +7,12 @@ import { Wallet } from '@transia/xrpl'
 // wallet secret == "mastersecret"
 // rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh
 export const MASTER_WALLET = Wallet.fromSeed('snoPBrXtMeMyMHUVTgbuqAfg1SUTb')
-// wallet secret == "gw"
+// wallet secret == "gw1"
 // rExKpRKXNz25UAjbckCRtQsJFcSfjL9Er3
 export const GW_WALLET = Wallet.fromSeed('safmpBLsy2paxybRMpvXqFqSrV5HG')
+// wallet secret == "gw2"
+// rMqTbPY6rzTspuBGBcS7po7FFTPwitrKHX
+export const GW_EUR_WALLET = Wallet.fromSeed('snqPCkCnfAbK4p981HZZGMj8SnhZ7')
 // wallet secret == "notactive"
 // rMqTbPY6rzTspuBGBcS7po7FFTPwitrKHX
 export const NOT_ACTIVE_WALLET = Wallet.fromSeed(
